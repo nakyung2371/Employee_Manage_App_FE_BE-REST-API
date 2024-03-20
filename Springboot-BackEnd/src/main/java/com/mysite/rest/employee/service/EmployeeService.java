@@ -13,10 +13,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
-    
-    //사원 리스트 
+
+    //사원 리스트
     public List<Employee> getEmployeeList() {
-    	return employeeRepository.findAll();
+
+        return employeeRepository.findAll();
     }
     
     //사원 정보 
