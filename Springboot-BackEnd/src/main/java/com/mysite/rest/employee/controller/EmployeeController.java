@@ -25,7 +25,7 @@ import com.mysite.rest.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin("*")		//CORS 셋팅 
-@RestController         //Rest API 통신
+@RestController         //Rest API 통신: @RestController + @Controller
 @RequestMapping ("/api/employee")       //@RequestMapping 하위 요청에 상속됨
 @RequiredArgsConstructor
 public class EmployeeController {
@@ -84,8 +84,8 @@ public class EmployeeController {
     // build update employee REST API
     @PutMapping("{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable long id,@RequestBody Employee employeeDetails) {
-        Employee updateEmployee = employeeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
+        Employee updateEmployee = employeeRepository.findById(id)   //employeeRepository 바로 호출하는 건 좋지 않은 방법
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id)); //Optional 안 쓰고 바로 exception 처리를 하고 있음
 
         updateEmployee.setFirstName(employeeDetails.getFirstName());
         updateEmployee.setLastName(employeeDetails.getLastName());

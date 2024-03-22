@@ -94,4 +94,54 @@ public class MovieService {
         movieRepository.save(movie);
     }
 
+    //삭제 메소드: 리턴: void, 매개변수: id
+    public void deleteMovie(long id) {
+
+        //id를 인풋 받아서 findById(id)
+        Optional<Movie> op =
+            movieRepository.findById(id);
+        Movie movie = null;
+        try {
+            ///op가 Null일 경우 예외 처리가 필요하다
+            movie = op.get();
+        } catch (Exception e) {
+
+        }
+
+//        System.out.println(movie.getTitle());
+
+        movieRepository.delete(movie);
+
+        System.out.println("DB에서 삭제 성공");
+
+    }
+
+    //상세보기: 리턴: MovieDto, 매개변수: id
+    public MovieDto getMovieDetail(long id) {
+        //
+        //id를 인풋 받아서 findById(id)
+        Optional<Movie> op =
+                movieRepository.findById(id);
+        Movie movie = null;
+        try {
+            ///op가 Null일 경우 예외 처리가 필요하다
+            movie = op.get();
+        } catch (Exception e) {
+
+        }
+
+        System.out.println("movie 객체 출력");
+        System.out.println(movie.getTitle());
+
+        //movie (Entity) -> MovieDto 매핑
+        MovieDto movieDto = new MovieDto();     //movieDto - 비어있는 상태를 만든 것
+
+        movieDto = movieDto.of(movie);
+
+        System.out.println("movieDto의 값 출력");
+        System.out.println(movieDto.getTitle());
+
+        return movieDto;
+    }
+
 }

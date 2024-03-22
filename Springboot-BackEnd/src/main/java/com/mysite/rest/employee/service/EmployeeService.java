@@ -1,6 +1,8 @@
 package com.mysite.rest.employee.service;
 
 import java.util.List;
+
+import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.stereotype.Service;
 
 import com.mysite.rest.employee.dto.EmployeeDTO;
@@ -22,9 +24,10 @@ public class EmployeeService {
     
     //사원 정보 
     public Employee createEmployee(EmployeeDTO employeeDTO) {
-    	Employee employee = new Employee(employeeDTO); 
-    	
-    	return employeeRepository.save(employee); 
+    	Employee employee = new Employee(employeeDTO);
+
+        System.out.println("사원등록 성공");
+    	return employeeRepository.save(employee);
     }
     
 }

@@ -11,18 +11,18 @@ const AddEmployeeComponent = () => {
     const {id} = useParams();
 
     const saveOrUpdateEmployee = (e) => {
-        e.preventDefault();
+        e.preventDefault();     //form 에 action으로 넘어가면 페이지 전체가 refresh 되는데 페이지 자체를 refresh 하는 것을 방지
 
         const employee = {firstName, lastName, emailId}
 
-        if(id){
+        if(id){     //PUT: 수정(UPDATE)
             EmployeeService.updateEmployee(id, employee).then((response) => {
                 navigate('/employees')
             }).catch(error => {
                 console.log(error)
             })
 
-        }else{
+        }else{      //POST: 등록(INSERT)
             EmployeeService.createEmployee(employee).then((response) =>{
 
                 console.log(response.data)
@@ -47,7 +47,7 @@ const AddEmployeeComponent = () => {
         })
     }, [])
 
-    const title = () => {
+    const title = () => {       //jsx 블락이 아님, javascript 블락임
 
         if(id){
             return <h2 className = "text-center">사원 수정</h2>
@@ -56,7 +56,7 @@ const AddEmployeeComponent = () => {
         }
     }
 
-    return (
+    return (        //jsx 블락: if문 사용 불가능 대신 삼항연산자 or 쇼트서킷
         <div>
            <br /><br />
            <div className = "container">

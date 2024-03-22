@@ -12,8 +12,9 @@ const ListEmployeeComponent = () => {
     }, [])
 
     const getAllEmployees = () => {
-        EmployeeService.getAllEmployees().then((response) => {
-            setEmployees(response.data)
+        EmployeeService.getAllEmployees().then((response) => {  //서버에서 넘겨주는 값이 then에 주입이 됨
+            console.log("성공: ", response)
+            setEmployees(response.data)                               //response의 데이터를 서버로 뽑아내서
             console.log(response.data);
         }).catch(error =>{
             console.log(error);
